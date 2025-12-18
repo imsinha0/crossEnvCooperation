@@ -38,6 +38,9 @@ actions = {agent: env.action_space(agent).sample(key_a[i]) for i, agent in enume
 print('example action dict', actions)
 
 state_seq = []
+action_seq = []
+reward_seq = []
+
 for _ in range(max_steps):
     state_seq.append(state)
     # Iterate random keys and sample actions
@@ -49,12 +52,16 @@ for _ in range(max_steps):
     # Step environment
     obs, state, rewards, dones, infos = env.step(key_s, state, actions)
 
+    action_seq.append(actions)
+    reward_seq.append(rewards)
+
 viz = OvercookedVisualizer()
 
 # Render to screen
-for s in state_seq:
-    viz.render(env.agent_view_size, s, highlight=False)
-    time.sleep(0.25)
+
+# for s in state_seq:
+#     viz.render(env.agent_view_size, s, highlight=False)
+#     time.sleep(0.25)
 
 # # Or save an animation
-# viz.animate(state_seq, agent_view_size=5, filename='animation.gif')
+viz.animate(state_seq, agent_view_size=env.agent_view_size, action_seq=action_seq, reward_seq=reward_seq, filename='animation.gif')

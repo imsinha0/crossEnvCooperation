@@ -32,7 +32,7 @@ class OvercookedVisualizer:
 		self._lazy_init_window()
 		self.window.show(block=block)
 
-	def render(self, agent_view_size, state, highlight=True, tile_size=TILE_PIXELS):
+	def render(self, agent_view_size, state, highlight=False, tile_size=TILE_PIXELS):
 		"""Method for rendering the state in a window. Esp. useful for interactive mode."""
 		return self._render_state(agent_view_size, state, highlight, tile_size)
 
@@ -136,7 +136,7 @@ class OvercookedVisualizer:
 
 		self.window.show_img(img)
 
-	def _render_state(self, agent_view_size, state, highlight=True, tile_size=TILE_PIXELS, use_window=True):
+	def _render_state(self, agent_view_size, state, highlight=False, tile_size=TILE_PIXELS, use_window=True):
 		"""
 		Render the state
 		"""
@@ -152,6 +152,7 @@ class OvercookedVisualizer:
 		highlight_mask = np.zeros(shape=(h,w), dtype=bool)
 
 		if highlight:
+			
 			# TODO: Fix this for multiple agents
 			f_vec = state.agent_dir
 			r_vec = np.array([-f_vec[1], f_vec[0]])

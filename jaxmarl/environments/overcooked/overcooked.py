@@ -153,9 +153,9 @@ class Overcooked(MultiAgentEnv):
 
         self.check_held_out = check_held_out
 
-        self.held_out_goal = None
-        self.held_out_wall = None
-        self.held_out_pot = None
+        self.held_out_goal = jnp.array([])
+        self.held_out_wall = jnp.array([])
+        self.held_out_pot = jnp.array([])
     
     def action_to_string(self, action: int) -> str:
         return Actions(action).name
@@ -254,7 +254,13 @@ class Overcooked(MultiAgentEnv):
         random_reset_fn = lambda k: jax.lax.cond(params['random_reset_fn'] == 'reset_all', random_og_5, random_counter_circuit, k)
         obs, state = jax.lax.cond(self.random_reset, random_reset_fn, jitted_reset, key)
         key = jax.random.split(key)[0]
-        (obs, state) = jax.lax.cond(jnp.logical_and(check_match(state), self.check_held_out), random_og_5, lambda k: (obs, state), key)
+        #(obs, state) = jax.lax.cond(jnp.logical_and(check_match(state), self.check_held_out), random_og_5, lambda k: (obs, state), key)
+        (obs, state) = jax.lax.cond(
+            self.check_held_out,
+            lambda k: jax.lax.cond(check_match(state), random_og_5, lambda k2: (obs, state), k),
+            lambda k: (obs, state),
+            key
+        )
         
         return lax.stop_gradient(obs), lax.stop_gradient(state)
     

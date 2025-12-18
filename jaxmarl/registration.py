@@ -11,7 +11,7 @@ from .environments import (
     # SimpleFacmacMPE9a,
     # SimplePushMPE,
     # SimpleAdversaryMPE,
-    # SimpleReferenceMPE,
+    SimpleReferenceMPE,
     # SMAX,
     # HeuristicEnemySMAX,
     # LearnedPolicyEnemySMAX,

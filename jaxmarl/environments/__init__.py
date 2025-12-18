@@ -1,5 +1,5 @@
 from .multi_agent_env import MultiAgentEnv, State
-# from .mpe import (
+from .mpe import (
 #     SimpleMPE,
 #     SimpleTagMPE,
 #     SimpleWorldCommMPE,
@@ -8,12 +8,12 @@ from .multi_agent_env import MultiAgentEnv, State
 #     SimpleSpeakerListenerMPE,
 #     SimplePushMPE,
 #     SimpleAdversaryMPE,
-#     SimpleReferenceMPE,
+     SimpleReferenceMPE,
 #     SimpleFacmacMPE,
 #     SimpleFacmacMPE3a,
 #     SimpleFacmacMPE6a,
 #     SimpleFacmacMPE9a
-# )
+ )
 # from .smax import SMAX, HeuristicEnemySMAX, LearnedPolicyEnemySMAX
 # from .switch_riddle import SwitchRiddle
 from .overcooked import Overcooked, overcooked_layouts, make_counter_circuit_9x9, make_forced_coord_9x9, make_coord_ring_9x9, make_asymm_advantages_9x9, make_cramped_room_9x9

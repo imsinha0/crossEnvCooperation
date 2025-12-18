@@ -32,9 +32,12 @@ import matplotlib as mpl
 mpl.rcParams['agg.path.chunksize'] = 10000
 import matplotlib.pyplot as plt
 
+# Add parent directory to path to allow crossEnvCooperation imports
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 
+from crossEnvCooperation.baselines.CEC.actor_networks import GraphActor, GraphLstmActor, MlpActor, MlpLstmActor
 
-from actor_networks import GraphActor, GraphLstmActor, MlpActor, MlpLstmActor
     
 class Transition(NamedTuple):
     done: jnp.ndarray
